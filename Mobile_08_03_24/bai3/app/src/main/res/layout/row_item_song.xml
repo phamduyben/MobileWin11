@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+    <TextView
+            android:layout_weight="2"
+            android:id="@+id/tv_code"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#1B8570"
+            android:textSize="18dp"
+            android:layout_marginTop="96dp" />
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_weight="8"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+        <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textColor="#2c3e50"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteY="279dp"
+                tools:layout_editor_absoluteX="166dp" />
+
+        <TextView
+                android:id="@+id/tv_lyric"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:ellipsize="end"
+                android:textColor="#34495e"
+                android:textSize="14dp"
+                android:layout_marginTop="104dp"
+                app:layout_constraintHorizontal_bias="0.614" />
+
+        <TextView
+                android:id="@+id/tv_artist"
+                android:layout_width="match_parent"
+                android:layout_weight="5"
+                android:textColor="#7f8c8d"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                tools:layout_editor_absoluteY="434dp"
+                tools:layout_editor_absoluteX="256dp" />
+    </LinearLayout>
+
+</LinearLayout>

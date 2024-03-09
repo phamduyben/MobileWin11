@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/vietnam2"
+    tools:context=".MainActivity"
+    tools:ignore="ExtraText">
+
+    <ImageView
+        android:id="@+id/imageView_background"
+        android:layout_width="175dp"
+        android:layout_height="151dp"
+        android:contentDescription="TODO"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.083"
+        app:srcCompat="@drawable/vietnam"
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/imageButton_on"
+        android:layout_width="71dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.092"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_background"
+        app:srcCompat="@drawable/button_on"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Switch
+        android:id="@+id/switch_wifi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="252dp"
+        android:minHeight="48dp"
+        android:text="Wifi"
+        android:textColor="#ff00"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.834"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox_background"
+        android:layout_width="157dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="40dp"
+        android:minHeight="48dp"
+        android:text="CheckBox"
+        android:textColor="#ff00"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_on" />
+
+    <RadioGroup
+        android:id="@+id/radiogroup_bg"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_background"
+        app:layout_constraintVertical_bias="0.327">
+
+        <RadioButton
+            android:id="@+id/radio_button_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:minHeight="48dp"
+            android:text="Background 1"
+            android:textColor="#ff00"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:id="@+id/radio_button_bg1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="Background 2"
+            android:textColor="#ff00"
+            android:textSize="25sp" />
+    </RadioGroup>
+
+    <Switch
+        android:id="@+id/switch_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:text="SetBackground"
+        android:textColor="#ff00"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageButton_on"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="341dp" />
+
+    <Button
+        android:id="@+id/button_nav_activity2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="navigation monitor 2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_nav_activity3"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_nav_activity3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Navigation monitor 3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.873"
+        app:layout_constraintStart_toStartOf="parent" />
+    <![CDATA[
+
+
+
+    />
+
+
+
+]]>
+</androidx.constraintlayout.widget.ConstraintLayout>

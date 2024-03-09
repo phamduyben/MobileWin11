@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">bai2</string>
+    <string name="video_call"><b><i>Video call</i></b></string>
+    <string name="notification"><b><i>Notification</i></b></string>
+    <string name="voice_call"><b><i>Voice call</i></b></string>
+    <string name="forget_your_password_recovery_it">Forget your password? Recovery it</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="t_t_t_t_tpassword">\t\t\t\t\tPassword</string>
+    <string name="create_naccount">Create\nAccount</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="are_you_new_user_register">Are you new user ? Register</string>
+</resources>
