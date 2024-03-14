@@ -51,14 +51,17 @@ public class LoginActivity extends AppCompatActivity {
     public void setupLogin() {
         textInputEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                    int after) {
+            public void beforeTextChanged(
+                    CharSequence s, int start, int count, int after
+            ) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before,
-                    int count) {
+            public void onTextChanged(
+                    CharSequence s, int start, int before,
+                    int count
+            ) {
                 password = s.toString();
 
                 if (password.length() >= 8) {
@@ -95,9 +98,11 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intentLogin);
 
                 } else {
-                    Toast.makeText(this,
-                                   "sai tai khoan or pass word",
-                                   Toast.LENGTH_LONG)
+                    Toast.makeText(
+                                 this,
+                                 "sai tai khoan or pass word",
+                                 Toast.LENGTH_LONG
+                         )
                          .show();
                 }
             } catch (Exception e) {
