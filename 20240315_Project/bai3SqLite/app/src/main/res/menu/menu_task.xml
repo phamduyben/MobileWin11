@@ -5,6 +5,5 @@
             android:title="ThêmNotes"
             android:icon="@drawable/ic_add_note"
             app:showAsAction="always"
-            id="@+id/menuAdd"
-            android:id="@+id/menuAddNotes" />
+            android:id="@+id/menuAdd" />
 </menu>

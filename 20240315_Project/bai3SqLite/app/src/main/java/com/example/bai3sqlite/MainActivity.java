@@ -39,7 +39,11 @@ public class MainActivity extends AppCompatActivity {
         // Call method to interact with the database
         showData();
 
-//        addEvent();
+        addEvent();
+    }
+
+    public void addEvent() {
+
     }
 
     public void setUpUI() {
@@ -88,20 +92,6 @@ public class MainActivity extends AppCompatActivity {
             addDialog();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void addDialog() {
-        dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_add_task);
-
-        edAdd = dialog.findViewById(R.id.editText_add_task);
-        btnAdd = dialog.findViewById(R.id.button_add);
-        btnCancle = dialog.findViewById(R.id.button_cancle);
-
-        solveButton();
-
-        dialog.show();
     }
 
     public void solveButton() {
@@ -173,4 +163,17 @@ public class MainActivity extends AppCompatActivity {
         dialogDelete.show();
     }
 
+    public void addDialog() {
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_add_task);
+
+        edAdd = dialog.findViewById(R.id.editText_add_task);
+        btnAdd = dialog.findViewById(R.id.button_add);
+        btnCancle = dialog.findViewById(R.id.button_cancle);
+
+        solveButton();
+
+        dialog.show();
+    }
 }
