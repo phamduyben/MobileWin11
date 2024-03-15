@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:background="#E6E4C1"
+        android:layout_height="match_parent">
+
+    <TextView
+            android:text="Update Task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:textSize="35sp"
+            android:gravity="center"
+            android:textStyle="bold|italic"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="60dp"
+            android:hint="Nhap ten cong viec"
+            android:textSize="25sp"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:id="@+id/editText_update" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/editText_update"
+            android:layout_marginTop="90dp"
+            android:weightSum="2"
+            android:padding="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+                android:autoSizeTextType="uniform"
+                android:text="Confirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_confirm"
+                android:layout_weight="1"
+                android:lines="1"
+                android:textSize="15sp" />
+
+        <Button
+                android:autoSizeTextType="uniform"
+                android:text="Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_cancle_update"
+                android:lines="1"
+                android:layout_weight="1"
+                android:textSize="15sp" />
+    </LinearLayout>
+    
+</androidx.constraintlayout.widget.ConstraintLayout>
