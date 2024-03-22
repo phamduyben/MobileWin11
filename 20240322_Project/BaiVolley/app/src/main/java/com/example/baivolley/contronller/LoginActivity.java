@@ -18,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.baivolley.R;
 import com.example.baivolley.api.VolleySingle;
+import com.example.baivolley.model.User;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -44,6 +45,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if (SharedPrefManager.getInstance(this)
+                             .isLoggedIn()) {
+            finish();
+            startActivity(new Intent(this, ProfileActivity.class));
+            return;
+        }
         setupUI();
         setupProcess();
     }
@@ -137,13 +144,20 @@ public class LoginActivity extends AppCompatActivity {
 //getting the user from the response
 //                            JSONObject userJson = obj.getJSONObject("user");
 //                            //creating a new user object
-//                            User user = new User(
-//                                    userJson.getInt("id"),
-//                                    userJson.getString("username"),
-//                                    userJson.getString("email"),
-//                                    userJson.getString("gender"),
-//                                    userJson.getString("images")
-//                            );
+//                        User user = new User(
+//                                userJson.getInt("id"),
+//                                userJson.getString("username"),
+//                                userJson.getString("email"),
+//                                userJson.getString("gender"),
+//                                userJson.getString("images")
+//                        );
+                        User user = new User(
+                                1,
+                                obj.getString("username"),
+                                obj.getString("password"),
+                                "nam",
+                                "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/1-beautiful-vietnamese-girl-in-traditional-long-dress-huynh-thu.jpg"
+                        );
                         Toast.makeText(
                                      this,
                                      obj.get("username")
@@ -152,7 +166,9 @@ public class LoginActivity extends AppCompatActivity {
                              )
                              .show();
 //starting the profile activity
-//                        finish();
+                        SharedPrefManager.getInstance(getApplicationContext())
+                                         .userLogin(user);
+                        finish();
                         Intent intent = new Intent(
                                 LoginActivity.this,
                                 ProfileActivity.class
@@ -210,12 +226,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void setupUI() {
-        if (SharedPrefManager.getInstance(this)
-                             .isLoggedIn()) {
-            finish();
-            startActivity(new Intent(this, MainActivity.class));
-            return;
-        }
+
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
         edtEmail = findViewById(R.id.editText_email);

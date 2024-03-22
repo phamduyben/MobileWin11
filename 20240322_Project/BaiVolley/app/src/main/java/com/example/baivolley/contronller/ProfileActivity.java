@@ -22,6 +22,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
         if (SharedPrefManager.getInstance(this)
                              .isLoggedIn()) {
             id = findViewById(R.id.tv_id);
@@ -30,16 +31,21 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             gender = findViewById(R.id.tv_gender);
             btnLogout = findViewById(R.id.button_logout);
             imageViewpprofile = findViewById(R.id.img_avt);
+
             User user = SharedPrefManager.getInstance(this)
                                          .getUser();
+
             id.setText(String.valueOf(user.getId()));
             userEmail.setText(user.getEmail());
             gender.setText(user.getGender());
             userName.setText(user.getName());
+
             Glide.with(getApplicationContext())
                  .load(user.getImages())
                  .into(imageViewpprofile);
+            
             btnLogout.setOnClickListener(this);
+
         } else {
             Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
             startActivity(intent);

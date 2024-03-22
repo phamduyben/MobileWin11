@@ -20,7 +20,6 @@ public class SharedPrefManager {
     //khoi tao constructor
     private SharedPrefManager(Context context) {
         ctx = context;
-
     }
 
     public static synchronized SharedPrefManager getInstance(Context context) {
@@ -52,7 +51,6 @@ public class SharedPrefManager {
                 Context.MODE_PRIVATE
         );
         return sharedPreferences.getString(KEY_USERNAME, null) != null;
-
     }
 
     //this method will give the logged in user
