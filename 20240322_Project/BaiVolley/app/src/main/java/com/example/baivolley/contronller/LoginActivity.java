@@ -14,15 +14,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.baivolley.R;
-import com.example.baivolley.api.Constants;
 import com.example.baivolley.api.VolleySingle;
-import com.example.baivolley.model.User;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -99,12 +94,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        imvLogin.setOnClickListener(v -> {
-            validateLogin();
-        });
+        imvLogin.setOnClickListener(v -> validateLogin());
     }
 
     public void validateLogin() {
+        progressBar.setVisibility(View.VISIBLE);
+
         String email = edtEmail.getText()
                                .toString();
 
@@ -119,71 +114,72 @@ public class LoginActivity extends AppCompatActivity {
             textInputEditText.requestFocus();
             return;
         }
+        String url = "https://reqres.in/api/users";
         //if everything is fine
         StringRequest stringRequest = new StringRequest(
-                Request.Method.POST, Constants.URL_LOGIN,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        progressBar.setVisibility(View.GONE);
-                        try {
-//converting response to json object
-                            JSONObject obj = new JSONObject(response);
-//if no error in response
-                            if (!obj.getBoolean("error")) {
-                                Toast.makeText(
-                                             getApplicationContext(),
-                                             obj.getString(
-                                                     "message"),
-                                             Toast.LENGTH_SHORT
-                                     )
-                                     .show();
-//getting the user from the response
-                                JSONObject userJson = obj.getJSONObject("user");
-                                //creating a new user object
-                                User user = new User(
-                                        userJson.getInt("id"),
-                                        userJson.getString("username"),
-                                        userJson.getString("email"),
-                                        userJson.getString("gender"),
-                                        userJson.getString("images")
-                                );
 
-//storing the user in shared preferences
-                                SharedPrefManager.getInstance(getApplicationContext())
-                                                 .userLogin(user);
-//starting the profile activity
-                                finish();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(
-                                             getApplicationContext(),
-                                             obj.getString(
-                                                     "message"),
-                                             Toast.LENGTH_SHORT
-                                     )
-                                     .show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                Request.Method.POST, url,
+                response -> {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(this, "success", Toast.LENGTH_SHORT)
+                         .show();
+                    try {
+//converting response to json object
+                        JSONObject obj = new JSONObject(response);
+//if no error in response
+//                        if (!obj.getBoolean("error")) {
+//                            Toast.makeText(
+//                                         getApplicationContext(),
+//                                         obj.getString("message"),
+//                                         Toast.LENGTH_SHORT
+//                                 )
+//                                 .show();
+//getting the user from the response
+//                            JSONObject userJson = obj.getJSONObject("user");
+//                            //creating a new user object
+//                            User user = new User(
+//                                    userJson.getInt("id"),
+//                                    userJson.getString("username"),
+//                                    userJson.getString("email"),
+//                                    userJson.getString("gender"),
+//                                    userJson.getString("images")
+//                            );
                         Toast.makeText(
-                                     getApplicationContext(),
-                                     error.getMessage(),
+                                     this,
+                                     obj.get("username")
+                                        .toString(),
                                      Toast.LENGTH_SHORT
                              )
                              .show();
+//starting the profile activity
+//                        finish();
+                        Intent intent = new Intent(
+                                LoginActivity.this,
+                                ProfileActivity.class
+                        );
+                        startActivity(intent);
+//                        } else {
+//                            Toast.makeText(
+//                                         getApplicationContext(),
+//                                         obj.getString(
+//                                                 "message"),
+//                                         Toast.LENGTH_SHORT
+//                                 )
+//                                 .show();
+//                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                }
+                },
+                error -> Toast.makeText(
+                                      getApplicationContext(),
+                                      error.getMessage(),
+                                      Toast.LENGTH_SHORT
+                              )
+                              .show()
         ) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("username", email);
                 params.put("password", password);
@@ -221,6 +217,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
         edtEmail = findViewById(R.id.editText_email);
         textInputLayout = findViewById(R.id.editText_password);
         textInputEditText = findViewById(R.id.textinput_password);
