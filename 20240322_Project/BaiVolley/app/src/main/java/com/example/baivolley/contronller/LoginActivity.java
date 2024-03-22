@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.baivolley.R;
+import com.example.baivolley.api.Constants;
 import com.example.baivolley.api.VolleySingle;
 import com.example.baivolley.model.User;
 import com.google.android.material.textfield.TextInputEditText;
@@ -121,11 +122,10 @@ public class LoginActivity extends AppCompatActivity {
             textInputEditText.requestFocus();
             return;
         }
-        String url = "https://reqres.in/api/users";
+
         //if everything is fine
         StringRequest stringRequest = new StringRequest(
-
-                Request.Method.POST, url,
+                Request.Method.POST, Constants.URL_LOGIN,
                 response -> {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(this, "success", Toast.LENGTH_SHORT)
@@ -134,55 +134,41 @@ public class LoginActivity extends AppCompatActivity {
 //converting response to json object
                         JSONObject obj = new JSONObject(response);
 //if no error in response
-//                        if (!obj.getBoolean("error")) {
-//                            Toast.makeText(
-//                                         getApplicationContext(),
-//                                         obj.getString("message"),
-//                                         Toast.LENGTH_SHORT
-//                                 )
-//                                 .show();
+                        if (!obj.getBoolean("error")) {
+                            Toast.makeText(
+                                         getApplicationContext(),
+                                         obj.getString("message"),
+                                         Toast.LENGTH_SHORT
+                                 )
+                                 .show();
 //getting the user from the response
-//                            JSONObject userJson = obj.getJSONObject("user");
-//                            //creating a new user object
-//                        User user = new User(
-//                                userJson.getInt("id"),
-//                                userJson.getString("username"),
-//                                userJson.getString("email"),
-//                                userJson.getString("gender"),
-//                                userJson.getString("images")
-//                        );
-                        User user = new User(
-                                1,
-                                obj.getString("username"),
-                                obj.getString("password"),
-                                "nam",
-                                "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/1-beautiful-vietnamese-girl-in-traditional-long-dress-huynh-thu.jpg"
-                        );
-                        Toast.makeText(
-                                     this,
-                                     obj.get("username")
-                                        .toString(),
-                                     Toast.LENGTH_SHORT
-                             )
-                             .show();
-//starting the profile activity
-                        SharedPrefManager.getInstance(getApplicationContext())
-                                         .userLogin(user);
-                        finish();
-                        Intent intent = new Intent(
-                                LoginActivity.this,
-                                ProfileActivity.class
-                        );
-                        startActivity(intent);
-//                        } else {
-//                            Toast.makeText(
-//                                         getApplicationContext(),
-//                                         obj.getString(
-//                                                 "message"),
-//                                         Toast.LENGTH_SHORT
-//                                 )
-//                                 .show();
-//                        }
+                            JSONObject userJson = obj.getJSONObject("user");
+                            //creating a new user object
+                            User user = new User(
+                                    userJson.getInt("id"),
+                                    userJson.getString("username"),
+                                    userJson.getString("email"),
+                                    userJson.getString("gender"),
+                                    userJson.getString("images")
+                            );
+                            //storing the user in shared preferences
+                            SharedPrefManager.getInstance(getApplicationContext())
+                                             .userLogin(user);
+                            finish();
+                            //starting the profile activity
+                            Intent intent = new Intent(
+                                    LoginActivity.this,
+                                    ProfileActivity.class
+                            );
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(
+                                         getApplicationContext(),
+                                         obj.getString("message"),
+                                         Toast.LENGTH_SHORT
+                                 )
+                                 .show();
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -204,25 +190,6 @@ public class LoginActivity extends AppCompatActivity {
         };
         VolleySingle.getInstance(this)
                     .addToRequestQueue(stringRequest);
-    }
-
-    public void temp() {
-        //            if (email.equals("admin") && password.equals("Admin12345@")) {
-//
-//                intentLogin = new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(intentLogin);
-//
-//            } else {
-//                Toast.makeText(
-//                             this,
-//                             "sai tai khoan or pass word",
-//                             Toast.LENGTH_LONG
-//                     )
-//                     .show();
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
     }
 
     public void setupUI() {
