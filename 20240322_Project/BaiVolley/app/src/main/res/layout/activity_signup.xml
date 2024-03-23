@@ -9,9 +9,9 @@
 
     <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="104dp"
+            android:layout_marginTop="24dp"
             android:lines="2"
             android:text="@string/create_naccount"
             android:textSize="60sp"
@@ -26,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="16dp"
             android:autofillHints=""
             android:drawableStart="@drawable/name"
@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="16dp"
             android:autofillHints=""
             android:drawableStart="@drawable/email"
@@ -59,52 +59,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText_name" />
 
-    <!--    <EditText-->
-    <!--        android:id="@+id/editText_password1"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="16dp"-->
-    <!--        android:layout_marginTop="40dp"-->
-    <!--        android:layout_marginEnd="16dp"-->
-    <!--        android:drawableLeft="@drawable/password"-->
-    <!--        android:drawablePadding="10dp"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="Password"-->
-    <!--        android:inputType="textPassword"-->
-    <!--        android:minHeight="48dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/editText_email1" />-->
-
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/editText_password1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="16dp"
-
-
             android:hint="@string/t_t_t_t_tpassword"
             android:textColorHint="@color/black"
             app:boxBackgroundColor="#FFFFFF"
             app:boxBackgroundMode="outline"
-
             app:counterEnabled="true"
             app:counterMaxLength="20"
-
             app:endIconMode="password_toggle"
             app:endIconTint="@color/black"
             app:helperText="Enter Password"
             app:helperTextEnabled="true"
-
             app:helperTextTextColor="#AA0F0F"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText_email1"
-
             app:startIconDrawable="@drawable/password"
             app:startIconTint="@color/design_default_color_primary">
 
@@ -145,4 +121,37 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/ic_image"
+            android:id="@+id/image_camera"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText_password1"
+            android:layout_marginTop="144dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.044" />
+
+    <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/ic_folder"
+            android:id="@+id/image_folder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText_password1"
+            android:layout_marginTop="144dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.246" />
+
+    <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/ic_folder"
+            android:id="@+id/image_avatar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText_password1"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.051" />
 </androidx.constraintlayout.widget.ConstraintLayout>

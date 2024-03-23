@@ -193,7 +193,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void setupUI() {
-
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
         edtEmail = findViewById(R.id.editText_email);

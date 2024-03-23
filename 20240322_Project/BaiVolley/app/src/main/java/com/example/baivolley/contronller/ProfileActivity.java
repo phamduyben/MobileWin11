@@ -43,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             Glide.with(getApplicationContext())
                  .load(user.getImages())
                  .into(imageViewpprofile);
-            
+
             btnLogout.setOnClickListener(this);
 
         } else {
@@ -58,9 +58,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if (v.equals(btnLogout)) {
             SharedPrefManager.getInstance(this)
                              .logout();
-//            Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-//            startActivity(intent);
-//            finish();
         }
     }
 
