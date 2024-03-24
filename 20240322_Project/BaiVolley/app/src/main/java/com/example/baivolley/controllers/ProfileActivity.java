@@ -1,4 +1,4 @@
-package com.example.baivolley.contronller;
+package com.example.baivolley.controllers;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;

@@ -1,6 +1,6 @@
 package com.example.baivolley.api;
 
-import static com.example.baivolley.contronller.ProfileActivity.imageUri;
+import static com.example.baivolley.controllers.ProfileActivity.imageUri;
 
 import android.os.Bundle;
 import android.widget.Toast;

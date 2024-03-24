@@ -1,4 +1,4 @@
-package com.example.baivolley.contronller;
+package com.example.baivolley.controllers;
 
 import android.content.Intent;
 import android.os.Bundle;

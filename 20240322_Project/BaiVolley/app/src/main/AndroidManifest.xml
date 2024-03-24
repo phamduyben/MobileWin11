@@ -26,16 +26,16 @@
                 android:name=".api.UploadImage"
                 android:exported="false" />
         <activity
-                android:name=".contronller.ProfileActivity"
+                android:name=".controllers.ProfileActivity"
                 android:exported="false" />
         <activity
-                android:name=".contronller.SignupActivity"
+                android:name=".controllers.SignupActivity"
                 android:exported="false" />
         <activity
-                android:name=".contronller.MainActivity"
+                android:name=".controllers.MainActivity"
                 android:exported="false" />
         <activity
-                android:name=".contronller.LoginActivity"
+                android:name=".controllers.LoginActivity"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
