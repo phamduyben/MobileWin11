@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtEmail;
     ImageButton imvLogin;
     TextView tvRegister;
-    Intent intentLogin, intentRegister;
     TextInputLayout textInputLayout;
     TextInputEditText textInputEditText;
     String password;
@@ -62,18 +61,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void setupRegister() {
-        tvRegister.setOnClickListener(v -> {
-            intentRegister = new Intent(LoginActivity.this, SignupActivity.class);
-            startActivity(intentRegister);
-        });
+        tvRegister.setOnClickListener(
+                v -> startActivity(new Intent(this, SignupActivity.class))
+        );
     }
 
     public void setupLogin() {
         textInputEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -97,9 +93,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            public void afterTextChanged(Editable s) {}
         });
 
         imvLogin.setOnClickListener(v -> validateLogin());
@@ -128,12 +122,10 @@ public class LoginActivity extends AppCompatActivity {
                 Request.Method.POST, Constants.URL_LOGIN,
                 response -> {
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(this, "success", Toast.LENGTH_SHORT)
-                         .show();
                     try {
-//converting response to json object
+                        //converting response to json object
                         JSONObject obj = new JSONObject(response);
-//if no error in response
+                        //if no error in response
                         if (!obj.getBoolean("error")) {
                             Toast.makeText(
                                          getApplicationContext(),
@@ -141,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                                          Toast.LENGTH_SHORT
                                  )
                                  .show();
-//getting the user from the response
+                            //getting the user from the response
                             JSONObject userJson = obj.getJSONObject("user");
                             //creating a new user object
                             User user = new User(
@@ -156,11 +148,9 @@ public class LoginActivity extends AppCompatActivity {
                                              .userLogin(user);
                             finish();
                             //starting the profile activity
-                            Intent intent = new Intent(
-                                    LoginActivity.this,
-                                    ProfileActivity.class
-                            );
-                            startActivity(intent);
+
+                            startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
+
                         } else {
                             Toast.makeText(
                                          getApplicationContext(),

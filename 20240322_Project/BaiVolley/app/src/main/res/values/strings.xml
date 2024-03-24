@@ -11,4 +11,5 @@
     <string name="t_t_t_t_tpassword">password</string>
     <string name="forget_your_password_recovery_it">forget your password recovery it</string>
     <string name="create_naccount">create account\n</string>
+    <string name="cancel">Cancel</string>
 </resources>
