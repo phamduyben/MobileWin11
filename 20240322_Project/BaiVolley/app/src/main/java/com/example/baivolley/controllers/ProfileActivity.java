@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -24,10 +25,21 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.baivolley.R;
-import com.example.baivolley.api.UploadImage;
+import com.example.baivolley.api.Const;
+import com.example.baivolley.api.RealPathUtil;
+import com.example.baivolley.api.ServiceAPI;
+import com.example.baivolley.model.Message1;
 import com.example.baivolley.model.User;
 
+import java.io.File;
 import java.util.Objects;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 11;
@@ -39,6 +51,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     ImageView imgCam, imgGallery;
     ImageButton imgEditAvatar;
     Dialog dialog;
+    int id1 = 0;
     private Intent cameraIntent, galleryIntent;
     private ActivityResultLauncher<Intent> cameraLauncher, galleryLauncher;
 
@@ -59,7 +72,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                                                            .get("data");
                             imageViewpprofile.setImageBitmap(photo);
                             dialog.dismiss();
-                            new UploadImage().uploadFile();
+//                            new UploadImage().uploadFile();
+                            UploadImage1();
                         }
                     }
                 }
@@ -78,7 +92,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         imageUri = data.getData();
                         imageViewpprofile.setImageURI(imageUri);
                         dialog.dismiss();
-                        new UploadImage().uploadFile();
+//                        new UploadImage().uploadFile();
+                        UploadImage1();
                     }
                 }
         );
@@ -229,4 +244,70 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    public void UploadImage1() {
+        if (SharedPrefManager.getInstance(this)
+                             .isLoggedIn()) {
+            User user = SharedPrefManager.getInstance(this)
+                                         .getUser();
+            id1 = user.getId();
+        }
+//        mProgressDialog.show();
+//khai báo biến và setText nếu có
+        String username = userName.getText()
+                                  .toString()
+                                  .trim();
+        RequestBody requestUsername = RequestBody.create(
+                MediaType.parse("multipart/form-data"),
+                String.valueOf(id1)
+        );
+// create RequestBody instance from file
+        String IMAGE_PATH = RealPathUtil.getRealPath(this, imageUri);
+        Log.e("ffff", IMAGE_PATH);
+        File file = new File(IMAGE_PATH);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+// MultipartBody. Part is used to send also the actual file name
+        MultipartBody.Part partbodyavatar =
+                MultipartBody.Part.createFormData(Const.MY_IMAGES, file.getName(), requestFile);
+//gọi Retrofit
+        ServiceAPI.servieapi.upload2(requestUsername, partbodyavatar)
+                            .enqueue(new Callback<Message1>() {
+                                @Override
+                                public void onResponse(
+                                        Call<Message1> call, Response<Message1> response
+                                ) {
+                                    Message1 message1 = response.body();
+                                    if (message1.isSuccess()) {
+                                        Toast.makeText(
+                                                     ProfileActivity.this,
+                                                     "Upload success",
+                                                     Toast.LENGTH_SHORT
+                                             )
+                                             .show();
+                                        Log.e("Upload", "success");
+                                        SharedPrefManager.getInstance(getApplicationContext())
+                                                         .logout();
+                                        finish();
+                                    } else {
+                                        Toast.makeText(
+                                                     ProfileActivity.this,
+                                                     "Upload failed",
+                                                     Toast.LENGTH_SHORT
+                                             )
+                                             .show();
+                                        Log.e("Upload", "failed1");
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Message1> call, Throwable t) {
+                                    Toast.makeText(
+                                                 ProfileActivity.this,
+                                                 "Upload failed",
+                                                 Toast.LENGTH_SHORT
+                                         )
+                                         .show();
+                                    Log.e("Upload", "failed");
+                                }
+                            });
+    }
 }

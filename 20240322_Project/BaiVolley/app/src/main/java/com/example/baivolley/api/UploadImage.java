@@ -56,6 +56,6 @@ public class UploadImage extends AppCompatActivity {
                progress =
                        (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
            });
-
     }
+
 }
