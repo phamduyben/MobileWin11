@@ -17,19 +17,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AllSubCategories {
-    public static List<SubCategory> subCategories = new ArrayList<>();
+    public static List<SubCategory> ans = new ArrayList<>();
     private final int idCategory;
-    private APIService apiService;
+    APIService apiService;
+
+    int cnt = 0;
 
     public AllSubCategories(int idCategory) {
         this.idCategory = idCategory;
     }
 
     public void getAllSubCategories() {
-//        RequestBody requestBody = new MultipartBody.Builder()
-//                .setType(MultipartBody.FORM)
-//                .addFormDataPart("idcategory", String.valueOf(idCategory))
-//                .build();
 
         apiService = RetrofitClient.getRetrofit()
                                    .create(APIService.class);
@@ -59,19 +57,18 @@ public class AllSubCategories {
 
                       @Override
                       public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                          Log.e("Error", "onFailure: " + t.getMessage());
                       }
                   });
-
     }
 
     public void parseJson(String json) {
         Type founderListType = new TypeToken<ArrayList<SubCategory>>() {}.getType();
         Gson gson = new Gson();
-        subCategories = gson.fromJson(json, founderListType);
-
-        for (SubCategory subCategory : subCategories) {
-            subCategory.getId();
-        }
+        List<SubCategory> subCategories = gson.fromJson(json, founderListType);
+        ans.addAll(subCategories);
+//        for (SubCategory subCategory : subCategories) {
+//            subCategory.getId();
+//        }
     }
 }

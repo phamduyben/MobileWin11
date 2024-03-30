@@ -5,21 +5,19 @@
             android:title="Home"
             android:id="@+id/home"
             android:icon="@drawable/home" />
-
     <item
-            android:title="profile"
+            android:title="Profile"
             android:id="@+id/profile"
-            android:icon="@drawable/infoprofile" />
-
+            android:icon="@drawable/ic_profile" />
     <item
-            android:title=""
+            android:title="Test"
             android:id="@+id/cart"
             android:enabled="false" />
-
+    
     <item
             android:title="Support"
             android:id="@+id/support"
-            android:icon="@drawable/blurcircular" />
+            android:icon="@drawable/ic_sp" />
 
     <item
             android:title="Setting"

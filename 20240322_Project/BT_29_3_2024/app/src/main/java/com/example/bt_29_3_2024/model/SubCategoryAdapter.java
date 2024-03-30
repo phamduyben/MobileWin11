@@ -48,7 +48,6 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
              .load(subCategory.getStrMealThumb())
              .into(holder.imgCategory);
         holder.tvCategory.setText(subCategory.getStrMeal());
-
     }
 
     @Override
