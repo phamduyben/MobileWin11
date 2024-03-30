@@ -251,6 +251,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                                          .getUser();
             id1 = user.getId();
         }
+        Toast.makeText(this, String.valueOf(id1), Toast.LENGTH_SHORT)
+             .show();
 //        mProgressDialog.show();
 //khai báo biến và setText nếu có
         String username = userName.getText()

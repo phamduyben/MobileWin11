@@ -1,9 +1,9 @@
-package com.example.bairetrofit.model;
+package com.example.bt_29_3_2024.model;
 
 public class SubCategory {
     private String id;
     private String strMeal;
-    private String strMealThumb;// link anh
+    private String strMealThumb;
     private String idMeal;
     private String idcategory;
 
