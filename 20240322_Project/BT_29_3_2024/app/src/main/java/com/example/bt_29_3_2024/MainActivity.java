@@ -2,6 +2,7 @@ package com.example.bt_29_3_2024;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -13,9 +14,7 @@ import com.example.bt_29_3_2024.api.APIService;
 import com.example.bt_29_3_2024.api.RetrofitClient;
 import com.example.bt_29_3_2024.model.Category;
 import com.example.bt_29_3_2024.model.CategoryAdapter;
-import com.example.bt_29_3_2024.model.SubCategory;
 import com.example.bt_29_3_2024.model.SubCategoryActivity;
-import com.example.bt_29_3_2024.model.SubCategoryAdapter;
 
 import java.util.List;
 
@@ -26,14 +25,12 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     public static final String NEXT_SCREEN = "details_screen";
     public static int ok = -1;
-    protected final int idCategory = 1;
+    public static int cnt = 0;
     RecyclerView rcCate;
     CategoryAdapter categoryAdapter;
     APIService apiService;
     List<Category> categoryList;
-    List<SubCategory> subCategoryList;
-    SubCategoryAdapter subCategoryAdapter;
-//    BottomNavigationView bottomNavigationView;
+    private Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +40,13 @@ public class MainActivity extends AppCompatActivity {
         setUpUI();
         getCategory();
 
-//        getAllSubCategories(1);
-//        addEventNavigation();
+        mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                cnt++;
+            }
+        }, 500);
     }
 
     private void getCategory() {

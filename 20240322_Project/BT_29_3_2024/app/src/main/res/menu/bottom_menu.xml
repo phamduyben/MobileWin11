@@ -2,25 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:title="Home"
+            android:title="@string/menu_home"
             android:id="@+id/home"
             android:icon="@drawable/home" />
     <item
-            android:title="Profile"
+            android:title="@string/menu_profile"
             android:id="@+id/profile"
-            android:icon="@drawable/ic_profile" />
+            android:icon="@drawable/infoprofile" />
     <item
-            android:title="Test"
             android:id="@+id/cart"
-            android:enabled="false" />
+            android:enabled="false"
+            android:title="" />
     
     <item
-            android:title="Support"
+            android:title="@string/menu_support"
             android:id="@+id/support"
-            android:icon="@drawable/ic_sp" />
+            android:icon="@drawable/blurcircular" />
 
     <item
-            android:title="Setting"
+            android:title="@string/menu_settings"
             android:id="@+id/setting"
             android:icon="@drawable/settings" />
 </menu>

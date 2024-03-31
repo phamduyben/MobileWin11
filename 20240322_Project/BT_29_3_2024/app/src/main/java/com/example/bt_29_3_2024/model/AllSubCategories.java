@@ -18,10 +18,8 @@ import retrofit2.Response;
 
 public class AllSubCategories {
     public static List<SubCategory> ans = new ArrayList<>();
-    private final int idCategory;
     APIService apiService;
-
-    int cnt = 0;
+    private final int idCategory;
 
     public AllSubCategories(int idCategory) {
         this.idCategory = idCategory;
@@ -66,9 +64,7 @@ public class AllSubCategories {
         Type founderListType = new TypeToken<ArrayList<SubCategory>>() {}.getType();
         Gson gson = new Gson();
         List<SubCategory> subCategories = gson.fromJson(json, founderListType);
+        ans.clear();
         ans.addAll(subCategories);
-//        for (SubCategory subCategory : subCategories) {
-//            subCategory.getId();
-//        }
     }
 }
