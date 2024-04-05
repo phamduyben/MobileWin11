@@ -41,7 +41,7 @@ public class SubCategoryActivity extends AppCompatActivity {
     @SuppressLint("NotifyDataSetChanged")
     public void getData() {
         Intent intent = getIntent();
-        int idCategory = intent.getIntExtra(NEXT_SCREEN, 1);
+        int idCategory = intent.getIntExtra(NEXT_SCREEN, -1);
         new AllSubCategories(idCategory).getAllSubCategories();
         temp.clear();
         temp.addAll(AllSubCategories.ans);

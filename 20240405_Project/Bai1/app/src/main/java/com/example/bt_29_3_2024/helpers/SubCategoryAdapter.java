@@ -53,11 +53,12 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
              .into(holder.imgCategory);
         holder.tvCategory.setText(subCategory.getStrMeal());
 
-        holder.itemView.setOnClickListener(v -> {
+        holder.itemView.setOnLongClickListener(v -> {
             // Handle click event
             if (onClickListener != null) {
                 onClickListener.onClick(position, subCategory);
             }
+            return true;
         });
     }
 
