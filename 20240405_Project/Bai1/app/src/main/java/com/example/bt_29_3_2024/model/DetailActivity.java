@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,17 +34,17 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        addNewMeal();
+        addNewMeal(getIntent().getIntExtra("id", 1));
 
         imageViewDetail = findViewById(R.id.img_detail);
         textViewPrice = findViewById(R.id.tv_price);
-
+        textViewInstructions = findViewById(R.id.tv_desc);
     }
 
-    private void addNewMeal() {
+    private void addNewMeal(int id) {
         apiService = RetrofitClient.getRetrofit()
                                    .create(APIService.class);
-        apiService.getNewMeals(52765)
+        apiService.getNewMeals(id)
                   .enqueue(new Callback<ResponseBody>() {
                       @Override
                       public void onResponse(
@@ -71,12 +70,13 @@ public class DetailActivity extends AppCompatActivity {
                                           jsonObject.getString("price")
                                   );
 
-                                  Toast.makeText(
-                                               DetailActivity.this,
-                                               newMeal.getStrmealthumb(),
-                                               Toast.LENGTH_SHORT
-                                       )
-                                       .show();
+                                  textViewInstructions.setText(newMeal.getInstructions());
+//                                  Toast.makeText(
+//                                               DetailActivity.this,
+//                                               newMeal.getStrmealthumb(),
+//                                               Toast.LENGTH_SHORT
+//                                       )
+//                                       .show();
 
                                   Glide.with(DetailActivity.this)
                                        .load(newMeal.getStrmealthumb())

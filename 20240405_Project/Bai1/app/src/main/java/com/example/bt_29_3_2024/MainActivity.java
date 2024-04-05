@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
         mHandler = new Handler();
 
         mHandler.postDelayed(() -> cnt++, 500);
-        btnNewMeal = findViewById(R.id.button);
-//        btnNewMeal.setOnClickListener(v -> addNewMeal());
     }
 
     private void getCategory() {
@@ -78,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                               rcCate.setAdapter(categoryAdapter);
 
                               categoryAdapter.notifyDataSetChanged();
-                              
+
                               categoryAdapter.setOnClickListener((position, model) -> {
                                   ok = model.getId();
                                   Log.e("TAG", "onResponse: " + ok);
