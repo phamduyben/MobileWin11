@@ -1,6 +1,6 @@
 package com.example.bt_29_3_2024.api;
 
-import com.example.bt_29_3_2024.model.Category;
+import com.example.bt_29_3_2024.models.Category;
 
 import java.util.List;
 

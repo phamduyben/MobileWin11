@@ -11,18 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.bt_29_3_2024.R;
-import com.example.bt_29_3_2024.model.SubCategory;
+import com.example.bt_29_3_2024.activities.DetailActivity;
+import com.example.bt_29_3_2024.models.SubCategory;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.SubCategoryViewHolder> {
-
-    private final List<SubCategory> subCategories;
-    private final Context mContext;
-    public SubCategory subCategory;
-    private SubCategoryAdapter.OnClickListener onClickListener;
+    private Context mContext;
+    private List<SubCategory> subCategories;
 
     public SubCategoryAdapter(Context context, List<SubCategory> subCategories) {
         this.mContext = context;
@@ -43,22 +41,22 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     public void onBindViewHolder(
             @NonNull SubCategoryViewHolder holder, int position
     ) {
-        subCategory = subCategories.get(position);
+        SubCategory subCategory = subCategories.get(position);
 
-        if (subCategory == null) {
-            return;
-        }
         Glide.with(mContext)
              .load(subCategory.getStrMealThumb())
              .into(holder.imgCategory);
+
         holder.tvCategory.setText(subCategory.getStrMeal());
 
-        holder.itemView.setOnLongClickListener(v -> {
-            // Handle click event
-            if (onClickListener != null) {
-                onClickListener.onClick(position, subCategory);
-            }
-            return true;
+        // redirect to detail activity
+        holder.itemView.setOnClickListener(v -> {
+            RedirectHelper.redirect(
+                    mContext,
+                    DetailActivity.class,
+                    "id",
+                    Integer.parseInt(subCategory.getIdMeal())
+            );
         });
     }
 
@@ -70,16 +68,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
         return 0;
     }
 
-    public void setOnClickListener(SubCategoryAdapter.OnClickListener onClickListener) {
-        this.onClickListener = onClickListener;
-    }
-
-    public interface OnClickListener {
-        void onClick(int position, SubCategory model);
-    }
-
     public class SubCategoryViewHolder extends RecyclerView.ViewHolder {
-
         TextView tvCategory;
         CircleImageView imgCategory;
 

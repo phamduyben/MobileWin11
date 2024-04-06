@@ -1,4 +1,4 @@
-package com.example.bt_29_3_2024.model;
+package com.example.bt_29_3_2024.models;
 
 public class SubCategory {
     private String id;

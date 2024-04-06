@@ -1,4 +1,4 @@
-package com.example.bt_29_3_2024.model;
+package com.example.bt_29_3_2024.activities;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.example.bt_29_3_2024.R;
 import com.example.bt_29_3_2024.api.APIService;
 import com.example.bt_29_3_2024.api.RetrofitClient;
+import com.example.bt_29_3_2024.models.NewMeal;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,16 +35,24 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        addNewMeal(getIntent().getIntExtra("id", 1));
+        setUpUI();
 
+        addNewMeal(getIntent().getIntExtra("id", -1));
+    }
+
+    public void setUpUI() {
+        // Hook UI elements
         imageViewDetail = findViewById(R.id.img_detail);
         textViewPrice = findViewById(R.id.tv_price);
         textViewInstructions = findViewById(R.id.tv_desc);
     }
 
     private void addNewMeal(int id) {
+        // get new meal by id
+
         apiService = RetrofitClient.getRetrofit()
                                    .create(APIService.class);
+
         apiService.getNewMeals(id)
                   .enqueue(new Callback<ResponseBody>() {
                       @Override
@@ -56,10 +65,12 @@ public class DetailActivity extends AppCompatActivity {
                                   String res = response.body()
                                                        .string();
 
+                                  // get json object from response
                                   JSONObject jsonObject =
                                           new JSONObject(res).getJSONArray("result")
                                                              .getJSONObject(0);
 
+                                  // get new meal from json object
                                   newMeal = new NewMeal(
                                           jsonObject.getString("id"),
                                           jsonObject.getString("meal"),
@@ -71,18 +82,13 @@ public class DetailActivity extends AppCompatActivity {
                                   );
 
                                   textViewInstructions.setText(newMeal.getInstructions());
-//                                  Toast.makeText(
-//                                               DetailActivity.this,
-//                                               newMeal.getStrmealthumb(),
-//                                               Toast.LENGTH_SHORT
-//                                       )
-//                                       .show();
 
                                   Glide.with(DetailActivity.this)
                                        .load(newMeal.getStrmealthumb())
                                        .into(imageViewDetail);
 
                                   textViewPrice.setText(newMeal.getPrice());
+                                  
                               } catch (IOException | JSONException e) {
                                   e.printStackTrace();
                               }

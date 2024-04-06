@@ -1,21 +1,18 @@
-package com.example.bt_29_3_2024;
+package com.example.bt_29_3_2024.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bt_29_3_2024.R;
 import com.example.bt_29_3_2024.api.APIService;
 import com.example.bt_29_3_2024.api.RetrofitClient;
 import com.example.bt_29_3_2024.helpers.CategoryAdapter;
-import com.example.bt_29_3_2024.model.Category;
-import com.example.bt_29_3_2024.model.SubCategoryActivity;
+import com.example.bt_29_3_2024.models.Category;
 
 import java.util.List;
 
@@ -24,15 +21,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String NEXT_SCREEN = "details_screen";
-    public static int ok = -1;
-    public static int cnt = 0;
     RecyclerView rcCate;
     CategoryAdapter categoryAdapter;
     APIService apiService;
     List<Category> categoryList;
-    Button btnNewMeal;
-    private Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
         setUpUI();
         getCategory();
-
-        mHandler = new Handler();
-
-        mHandler.postDelayed(() -> cnt++, 500);
     }
 
     private void getCategory() {
@@ -59,36 +47,7 @@ public class MainActivity extends AppCompatActivity {
                       ) {
                           if (response.isSuccessful()) {
                               categoryList = response.body();
-                              categoryAdapter = new CategoryAdapter(
-                                      MainActivity.this,
-                                      categoryList
-                              );
-                              rcCate.setHasFixedSize(true);
-
-                              RecyclerView.LayoutManager layoutManager =
-                                      new LinearLayoutManager(
-                                              getApplicationContext(),
-                                              LinearLayoutManager.VERTICAL,
-                                              false
-                                      );
-
-                              rcCate.setLayoutManager(layoutManager);
-                              rcCate.setAdapter(categoryAdapter);
-
-                              categoryAdapter.notifyDataSetChanged();
-
-                              categoryAdapter.setOnClickListener((position, model) -> {
-                                  ok = model.getId();
-                                  Log.e("TAG", "onResponse: " + ok);
-                                  Intent intent = new Intent(
-                                          MainActivity.this,
-                                          SubCategoryActivity.class
-                                  );
-                                  // Passing the data to the
-                                  // EmployeeDetails Activity
-                                  intent.putExtra(NEXT_SCREEN, ok);
-                                  startActivity(intent);
-                              });
+                              eventCategory();
                           } else {
                               int statusCode = response.code();
                               Log.e("Error", "onResponse: " + statusCode);
@@ -107,7 +66,23 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpUI() {
         rcCate = findViewById(R.id.rc_category);
-//        bottomNavigationView = findViewById(R.id.btn_navigation);
     }
 
+    public void eventCategory() {
+        // do something
+        categoryAdapter = new CategoryAdapter(MainActivity.this, categoryList);
+        rcCate.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager =
+                new LinearLayoutManager(
+                        getApplicationContext(),
+                        LinearLayoutManager.VERTICAL,
+                        false
+                );
+
+        rcCate.setLayoutManager(layoutManager);
+        rcCate.setAdapter(categoryAdapter);
+
+        categoryAdapter.notifyDataSetChanged();
+    }
 }

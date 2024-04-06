@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.bt_29_3_2024.R;
-import com.example.bt_29_3_2024.model.Category;
+import com.example.bt_29_3_2024.activities.SubCategoryActivity;
+import com.example.bt_29_3_2024.models.Category;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
-    private final List<Category> categoryList;
-    private final Context context;
-    public Category ans;
-    private OnClickListener onClickListener;
+    private List<Category> categoryList;
+    private Context context;
+//    private OnClickListener onClickListener;
 
     public CategoryAdapter(Context context, List<Category> categoryList) {
         this.categoryList = categoryList;
@@ -39,30 +39,30 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             MyViewHolder holder,
             @SuppressLint("RecyclerView") int position
     ) {
-        ans = categoryList.get(position);
+
+        Category ans = categoryList.get(position);
         holder.categoryName.setText(ans.getName());
         Glide.with(context)
              .load(ans.getImages())
              .into(holder.categoryImage);
 
-        holder.itemView.setOnClickListener(v -> {
-            if (onClickListener != null) {
-                onClickListener.onClick(position, ans);
-            }
-        });
+        holder.categoryImage.setOnClickListener(
+                v -> {
+                    RedirectHelper.redirect(
+                            context,
+                            SubCategoryActivity.class,
+                            "idcategory",
+                            ans.getId(),
+                            "namecategory",
+                            ans.getName()
+                    );
+                }
+        );
     }
 
     @Override
     public int getItemCount() {
         return categoryList == null ? 0 : categoryList.size();
-    }
-
-    public void setOnClickListener(OnClickListener onClickListener) {
-        this.onClickListener = onClickListener;
-    }
-
-    public interface OnClickListener {
-        void onClick(int position, Category model);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -73,20 +73,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             super(itemView);
             categoryImage = itemView.findViewById(R.id.image_cate);
             categoryName = itemView.findViewById(R.id.tvNameCategory);
-
-//            categoryImage.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    // Do something
-//                    Toast.makeText(
-//                                 context,
-//                                 "You clicked on " + ans.getId(),
-//                                 Toast.LENGTH_SHORT
-//                         )
-//                         .show();
-//                }
-//            });
-
         }
     }
 }

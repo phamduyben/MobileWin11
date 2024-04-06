@@ -1,4 +1,4 @@
-package com.example.bt_29_3_2024.model;
+package com.example.bt_29_3_2024.models;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class Category implements Serializable {
     @SerializedName("id")
-    private int id;
+    private int id;// tu id ->
     @SerializedName("name")
     private String name;
     @SerializedName("images")
@@ -51,15 +51,5 @@ public class Category implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", images='" + images + '\'' +
-                ", description='" + description + '\'' +
-                '}';
     }
 }
