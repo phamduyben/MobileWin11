@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "319415523929",
+    "firebase_url": "https://videoshort-914fd-default-rtdb.firebaseio.com",
+    "project_id": "videoshort-914fd",
+    "storage_bucket": "videoshort-914fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319415523929:android:6c2311ad2bb031bfd42f48",
+        "android_client_info": {
+          "package_name": "com.example.bai1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUOc1om8yxVf-g0wIUvIU3WPTu-tv3ASs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
